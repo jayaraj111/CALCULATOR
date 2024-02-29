@@ -14,7 +14,7 @@ function display(num) {
 }
 
 function allClear() {
-    outputScreen.value = "0";
+    outputScreen.value = "";
 }
 
 function del() {
