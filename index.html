@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Calculator | D-vers </title>
+  <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+</head>
+<body>
+
+<div class="container align-center">
+  <div class="grid calculator">
+    <input type="text" id="output-screen" readonly placeholder="0"/>
+    <button class="text-color" onclick="allClear()">C</button>
+    <button class="text-color" onclick="del()">DEL</button>
+    <button class="text-color" onclick="display('%')">%</button>
+    <button class="text-color" onclick="display('/')">&#247</button>
+    <button onclick="display(7)">7</button>
+    <button onclick="display(8)">8</button>
+    <button onclick="display(9)">9</button>
+    <button class="text-color" onclick="display('*')">x</button>
+    <button onclick="display(4)">4</button>
+    <button onclick="display(5)">5</button>
+    <button onclick="display(6)">6</button>
+    <button class="text-color" onclick="display('-')">-</button>
+    <button onclick="display(1)">1</button>
+    <button onclick="display(2)">2</button>
+    <button onclick="display(3)">3</button>
+    <button class="text-color" onclick="display('+')">+</button>
+    <button onclick="display('.')">.</button>
+    <button onclick="display(0)">0</button>
+    <button class="equal-to" onclick="calculate()">=</button>
+  </div>
+</div>
+<script src="script.js"></script>
+<script>
+  function calculate() {
+    try {
+       
+        var expression = outputScreen.value;
+
+     
+        var numbers = expression.match(/\d+(\.\d+)?/g); 
+        var operators = expression.match(/[+\-*/]/g);
+
+        
+        if (numbers && operators) {
+           
+            var result = parseFloat(numbers[0]);
+
+          
+            for (var i = 0; i < operators.length; i++) {
+                var number = parseFloat(numbers[i + 1]);
+                var operator = operators[i];
+
+              
+                if (operator === '+') {
+                    result += number;
+                } else if (operator === '-') {
+                    result -= number;
+                } else if (operator === '*') {
+                    result *= number;
+                } else if (operator === '/') {
+                    result /= number;
+                }
+            }
+
+           
+            outputScreen.value = result;
+        } else {
+           
+            throw new Error("Invalid expression");
+        }
+    } catch (err) {
+      
+        alert("Invalid equation!");
+    }
+}
+  // Add event listener to the document object
+  document.addEventListener('keydown', function(event) {
+      
+  
+      if   (event.keyCode === 8 || event.keyCode === 46) {
+      del();
+      }
+      if   (event.keyCode === 67 ) {
+        allClear();
+      }
+      if   (event.keyCode === 110 || event.keyCode === 190) {
+        display('.');
+      }
+      if   (event.keyCode === 13)  {
+        calculate();
+      }
+      if   (event.keyCode === 105 || event.keyCode === 57) {
+        display(9);
+      }
+      if   (event.keyCode === 104 ||  event.keyCode === 56) {
+        display(8);
+      }
+      if   (event.keyCode === 103 || event.keyCode === 55) {
+        display(7);
+      }
+      if   (event.keyCode === 102 || event.keyCode === 54) {
+        display(6);
+      }
+      if   (event.keyCode === 101 || event.keyCode === 53) {
+        display(5);
+      }
+      if   (event.keyCode === 100 || event.keyCode === 52) {
+        display(4);
+      }
+      if   (event.keyCode === 99 || event.keyCode === 51) {
+        display(3);
+      }
+      if   (event.keyCode === 98 || event.keyCode === 50) {
+        display(2);
+      }
+      if   (event.keyCode === 97 || event.keyCode === 49) {
+        display(1);
+      }
+      if   (event.keyCode === 96 || event.keyCode === 48) {
+        display(0);
+      }
+      if ((event.keyCode === 107 )  || event.keyCode === 187 ) {
+        display('+');
+      }
+      if   (event.keyCode === 109 || event.keyCode === 189) {
+        display('-');
+      }
+      if   (event.keyCode === 106 ) {
+        display('*');
+      }
+      if   (event.keyCode === 111 || event.keyCode === 191) {
+        display('/');
+      }
+      
+    
+  });
+</script>
+</body>
+</html>
